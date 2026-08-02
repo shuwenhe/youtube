@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube 双语字幕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 300px;
+            padding: 16px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: #f9f9f9;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 16px;
+            color: #030303;
+            margin-bottom: 4px;
+        }
+
+        .header p {
+            font-size: 12px;
+            color: #606060;
+        }
+
+        .divider {
+            height: 1px;
+            background: #ddd;
+            margin: 16px 0;
+        }
+
+        .setting-group {
+            margin-bottom: 16px;
+        }
+
+        .setting-label {
+            display: block;
+            font-size: 13px;
+            color: #030303;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .3s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #1f1f1f;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+        .language-options {
+            display: flex;
+            gap: 8px;
+        }
+
+        .lang-btn {
+            flex: 1;
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.2s;
+            color: #606060;
+        }
+
+        .lang-btn:hover {
+            border-color: #0f0f0f;
+        }
+
+        .lang-btn.active {
+            background: #0f0f0f;
+            color: white;
+            border-color: #0f0f0f;
+        }
+
+        .slider-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            height: 4px;
+            border-radius: 2px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #0f0f0f;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #0f0f0f;
+            cursor: pointer;
+            border: none;
+        }
+
+        .font-size-display {
+            min-width: 30px;
+            text-align: right;
+            font-size: 12px;
+            color: #606060;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 3px solid #1976d2;
+            padding: 10px 12px;
+            border-radius: 4px;
+            margin-top: 16px;
+        }
+
+        .info-box p {
+            font-size: 12px;
+            color: #1565c0;
+            line-height: 1.5;
+        }
+
+        button {
+            font-family: inherit;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>YouTube 双语字幕</h1>
+        <p>中英文字幕显示工具</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="setting-group">
+        <label class="setting-label">启用字幕</label>
+        <div class="toggle-switch">
+            <label class="switch">
+                <input type="checkbox" id="enableToggle" checked>
+                <span class="slider"></span>
+            </label>
+            <span id="statusText" style="font-size: 12px; color: #606060;">已启用</span>
+        </div>
+    </div>
+
+    <div class="setting-group">
+        <label class="setting-label">语言选择</label>
+        <div class="language-options">
+            <button class="lang-btn active" data-lang="bilingual">双语</button>
+            <button class="lang-btn" data-lang="zh">中文</button>
+            <button class="lang-btn" data-lang="en">英文</button>
+        </div>
+    </div>
+
+    <div class="setting-group">
+        <label class="setting-label">字体大小</label>
+        <div class="slider-group">
+            <input type="range" id="fontSizeSlider" min="10" max="28" value="16">
+            <span class="font-size-display" id="fontSizeDisplay">16px</span>
+        </div>
+    </div>
+
+    <div class="info-box">
+        <p>💡 <strong>提示：</strong>字幕需要视频提供者支持。如果没有显示字幕，请确保YouTube视频已启用字幕。</p>
+    </div>
+</body>
+<script src="popup.js"></script>
+</html>

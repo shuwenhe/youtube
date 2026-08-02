@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- 背景 -->
+  <rect width="128" height="128" fill="#1f1f1f" rx="24"/>
+  
+  <!-- 外圆 -->
+  <circle cx="64" cy="64" r="48" fill="none" stroke="#ff0000" stroke-width="3"/>
+  
+  <!-- 第一个 C -->
+  <path d="M 35 50 Q 35 40 45 40 Q 55 40 55 50" fill="none" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 35 78 Q 35 88 45 88 Q 55 88 55 78" fill="none" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- 第二个 C -->
+  <path d="M 73 50 Q 73 40 83 40 Q 93 40 93 50" fill="none" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 73 78 Q 73 88 83 88 Q 93 88 93 78" fill="none" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- 中文文字提示 -->
+  <text x="64" y="110" font-family="Arial, sans-serif" font-size="14" fill="#ff0000" text-anchor="middle" font-weight="bold">双语</text>
+</svg>

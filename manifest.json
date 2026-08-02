@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube 中英文双语字幕",
+  "version": "1.0.0",
+  "description": "在YouTube上显示中英文双语字幕",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "host_permissions": [
+    "*://www.youtube.com/*",
+    "*://youtube.com/*",
+    "*://youtu.be/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "YouTube 双语字幕",
+    "default_icon": "images/icon.svg"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.youtube.com/*",
+        "*://youtube.com/*",
+        "*://youtu.be/*"
+      ],
+      "js": ["content-script.js"],
+      "css": ["styles.css"],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "128": "images/icon.svg"
+  }
+}
